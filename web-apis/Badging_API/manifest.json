@@ -1,0 +1,12 @@
+{
+  "name": "My app",
+  "start_url": "./",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "icon1.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

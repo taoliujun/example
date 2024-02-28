@@ -1,0 +1,12 @@
+{
+  "name": "pnpm-monorepo",
+  "private": true,
+  "author": "taoliujun",
+  "license": "MIT",
+  "devDependencies": {
+    "@taoliujun/eslint-config": "^2.1.0"
+  },
+  "scripts": {
+    "lint": "pnpm run -r lint"
+  }
+}

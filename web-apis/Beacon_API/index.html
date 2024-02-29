@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Beacon API - Web APIs</title>
+</head>
+
+<body>
+  <script>
+    let data = 0;
+
+    function getUrl() {
+      return document.querySelector('#url').value;
+    }
+
+    function sendData(source) {
+      data += 1;
+      navigator.sendBeacon(getUrl(), new URLSearchParams({ data, source }));
+    }
+
+    (() => {
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
+          sendData('hidden');
+        }
+      });
+    })();
+  </script>
+
+  <div>
+    server url: <input id="url" type="text" value="http://127.0.0.1:8888/log" style="width: 200px;" />
+    <button onclick="javascript:sendData('manual');">sendData</button>
+  </div>
+</body>
+
+</html>

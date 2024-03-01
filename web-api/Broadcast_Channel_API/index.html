@@ -14,7 +14,7 @@
   </script>
 
   <div>
-    <input type="text" id="username" placeholder="please input a username" />
+    <input type="text" autocomplete="off" id="username" placeholder="please input a username" />
     <button type="button" onclick="javascript:bc.postMessage({
       time: new Date().toLocaleString(),
       username: document.querySelector('#username').value,

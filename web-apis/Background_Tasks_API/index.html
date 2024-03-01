@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Background Tasks_API API - Web APIs</title>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/md5@2.3.0/dist/md5.min.js"></script>
+
+  <script>
+    const tasks = [];
+
+    function addTask(count) {
+      for (let n = 1; n <= count; n += 1) {
+        tasks.push(function () {
+          for (let i = 1; i <= 1000; i += 1) {
+            MD5(i)
+          }
+        })
+      }
+    }
+
+    function runTasks() {
+      window.requestIdleCallback((e) => {
+        console.group('runTasks')
+        console.time('excute')
+        let startCount = tasks.length;
+        while ((e.timeRemaining() > 0 || e.didTimeout) && tasks.length > 0) {
+          const ct = tasks.shift();
+          ct?.();
+        }
+        console.timeEnd('excute')
+        console.log(`run ${startCount - tasks.length} tasks`)
+        console.groupEnd()
+        if (tasks.length > 0) {
+          runTasks()
+        }
+      })
+    }
+
+    function runAllTasks() {
+      console.group('runAllTasks')
+      console.time('excute')
+      let startCount = tasks.length;
+      while (tasks.length > 0) {
+        const ct = tasks.shift();
+        ct?.();
+      }
+      console.timeEnd('excute')
+      console.log(`run ${startCount - tasks.length} tasks`)
+      console.groupEnd()
+      if (tasks.length > 0) {
+        runAllTasks()
+      }
+    }
+
+    function drawDom() {
+      const d1 = document.querySelector('#d1')
+      d1.textContent = `The tasks count is ${tasks.length} at ${new Date().toLocaleTimeString()}`
+      return
+    }
+
+    window.setInterval(drawDom, 1000)
+  </script>
+  <div>
+    <button onclick="javascript:addTask(100);">add 100 task</button>
+    <button onclick="javascript:runTasks();">run tasks</button>
+    <button onclick="javascript:runAllTasks();">run all tasks</button>
+    <div id="d1" style="height:200px;overflow: auto;"></div>
+    <p>在不同性能的设备上，表现有所不同。</p>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Broadcast Channel API - Web API</title>
+</head>
+
+<body>
+  <script>
+    const bc = new BroadcastChannel('test1')
+    bc.onmessage = (e) => {
+      console.log(e?.data)
+    }
+  </script>
+
+  <div>
+    <input type="text" id="username" placeholder="please input a username" />
+    <button type="button" onclick="javascript:bc.postMessage({
+      time: new Date().toLocaleString(),
+      username: document.querySelector('#username').value,
+    });">发送当前时间</button>
+  </div>
+</body>
+
+</html>

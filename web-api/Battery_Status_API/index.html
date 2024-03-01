@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Battery Status API - Web API</title>
+</head>
+
+<body>
+  <script>
+    navigator.getBattery().then((battery) => {
+      function updateChargeInfo(e) {
+        if (e) {
+          console.log('==battery changed', e.target)
+        }
+        document.querySelector('#b_charging').textContent = `${battery.charging ? "是" : "否"}`;
+        document.querySelector('#b_level').textContent = `${battery.level * 100}%`;
+        document.querySelector('#b_charging_time').textContent = `${battery.chargingTime}秒`;
+        document.querySelector('#b_discharging_time').textContent = `${battery.dischargingTime}秒`;
+      }
+      updateChargeInfo();
+
+      battery.addEventListener("chargingchange", updateChargeInfo);
+      battery.addEventListener("levelchange", updateChargeInfo);
+      battery.addEventListener("chargingtimechange", updateChargeInfo);
+      battery.addEventListener("dischargingtimechange", updateChargeInfo);
+    })
+  </script>
+
+  <div>
+    <div>
+      <p>充电状态：<strong id="b_charging"></strong></p>
+      <p>电池电量：<strong id="b_level"></strong></p>
+      <p>充电时长：<strong id="b_charging_time"></strong></p>
+      <p>续航时长：<strong id="b_discharging_time"></strong></p>
+    </div>
+  </div>
+</body>
+
+</html>

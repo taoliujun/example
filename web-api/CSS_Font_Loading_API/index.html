@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>CSS_Font_Loading_API - Web API</title>
+    </head>
+
+    <body>
+        <div>
+            <div style="font-family: f1; font-size: 30px">hello text</div>
+            <canvas id="c1" width="400" height="400"></canvas>
+        </div>
+
+        <script>
+            (() => {
+                const font1 = new FontFace(
+                    'f1',
+                    `url(https://fonts.gstatic.com/s/kodemono/v1/A2BYn5pb0QgtVEPFnlYOnYLweZGZuA.woff2) format('woff2')`,
+                );
+                font1.load();
+                document.fonts.add(font1);
+
+                console.log('==font1 status', font1.status);
+                document.fonts.ready.then(() => {
+                    console.log('==font1 status', font1.status);
+                    const ctx = document.querySelector('#c1').getContext('2d');
+                    ctx.font = '30px f1';
+                    ctx.fillText('hello canvas', 20, 50);
+                });
+            })();
+        </script>
+    </body>
+</html>

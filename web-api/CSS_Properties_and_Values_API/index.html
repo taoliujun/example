@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>CSS_Properties_and_Values_API - Web API</title>
+    </head>
+
+    <body>
+        <style>
+            .parent1 {
+                --user-color1: yellow;
+                .item {
+                    width: 200px;
+                    height: 50px;
+                    border: 1px solid #000;
+                }
+                .item1 {
+                    background-color: var(--user-color1);
+                }
+                .item2 {
+                    --user-color1: red;
+                    background-color: var(--user-color1);
+                }
+            }
+
+            .parent2 {
+                --user-color2: yellow;
+                .item {
+                    width: 200px;
+                    height: 50px;
+                    border: 1px solid #000;
+                }
+                .item1 {
+                    background-color: var(--user-color2);
+                }
+                .item2 {
+                    --user-color2: red;
+                    background-color: var(--user-color2);
+                }
+            }
+        </style>
+        <div>
+            Color with CSS custom property
+            <div class="parent1">
+                <div class="item item1"></div>
+                <div class="item item2"></div>
+            </div>
+            <br />
+            <br />
+            Color with CSS variable
+            <div class="parent2">
+                <div class="item item1"></div>
+                <div class="item item2"></div>
+            </div>
+        </div>
+
+        <script>
+            CSS.registerProperty({
+                name: '--user-color1',
+                syntax: '<color>',
+                inherits: false,
+                initialValue: 'green',
+            });
+        </script>
+    </body>
+</html>

@@ -1,53 +1,40 @@
 <!--hexo
 
 ---
-url: web-api-CSS_Custom_Highlight_API
+url: web-api-CSS_Properties_and_Values_API
 tags:
   - webapi
-  - CSS Custom Highlight
+  - CSS Properties and Values
 ---
 
 -->
 
-# CSS Custom Highlight
+# CSS Properties and Values
 
-> MDN: https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API
+> MDN: https://developer.mozilla.org/en-US/docs/Web/API/CSS_Properties_and_Values_API
 
-**CSS Custom Highlight**为页面上的[Range](https://developer.mozilla.org/en-US/docs/Web/API/Range)对象，创建高亮标识，并结合css伪元素`::highlight`自定义显示。
+**CSS Properties and Values**用于为CSS扩展属性，
 
-使用场景有*搜索词高亮*、*多人协作时的文本多色高亮*等。
+> 和`CSS variables`有类似点，但后者只是一个变量，没有CSS属性之特性：比如继承特性。
 
 ## 接口
 
-### Highlight
+### CSSPropertyRule
 
-创建高亮对象，并包含若干`Range`对象。例如：
+属性和值的定义描述。
 
-```javascript
-const user1Highlight = new Highlight(range1, range2);
-```
+> syntax选项标识了值的预期语法，如`<color>`。
 
-### HighlightRegistry
+## 方法
 
-为高亮对象注册css标识，即可在css中访问。例如：
+### registerProperty
 
-```javascript
-// javascript
-CSS.highlights.set('user-1-highlight', user1Highlight);
-```
-
-```css
-// css
-::highlight(user-1-highlight) {
-    background-color: yellow;
-    color: black;
-}
-```
+创建自定义css属性。
 
 ## 示例
 
-示例：https://taoliujun.github.io/example/web-api/CSS_Custom_Highlight_API/index.html
+示例：https://taoliujun.github.io/example/web-api/CSS_Properties_and_Values_API/index.html
 
-1. 为`Range`区域设置了特殊的样式。
+1. 两个Div使用了一样的样式，但`registerProperty`注册了**非继承**的属性，所以`.parent1 .item1`并未继承`.parent1`中设置的属性值，而使用了默认值。
 
-![image](https://github.com/taoliujun/blog/assets/5689134/3362d87f-c006-42b3-8d71-0949e65b7080)
+![image](https://github.com/taoliujun/blog/assets/5689134/9caf3326-17d2-4390-8484-5ec5e2ea835e)

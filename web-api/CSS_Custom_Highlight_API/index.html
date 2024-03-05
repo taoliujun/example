@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>CSS_Custom_Highlight_API - Web API</title>
+    </head>
+
+    <body>
+        <style>
+            ::highlight(highlight-1) {
+                background-color: yellow;
+                color: black;
+            }
+            ::selection {
+                color: red;
+            }
+        </style>
+
+        <div>
+            <div id="d1">Hello world, my name is Lebron James, nice to meet you.</div>
+            <div id="d2">I am a basketball player.</div>
+        </div>
+
+        <script>
+            function getRange(node, start, end) {
+                const r1 = new Range();
+                r1.setStart(node, start);
+                r1.setEnd(node, end);
+                return r1;
+            }
+
+            const d1 = document.querySelector('#d1');
+            const d2 = document.querySelector('#d2');
+            const h1 = new Highlight();
+
+            h1.add(getRange(d1.firstChild, 0, 5));
+            h1.add(getRange(d1.firstChild, 24, 36));
+            h1.add(getRange(d2.firstChild, 7, 17));
+
+            CSS.highlights.set('highlight-1', h1);
+        </script>
+    </body>
+</html>

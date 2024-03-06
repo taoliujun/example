@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>CSS_Typed_OM_API - Web API</title>
+    </head>
+
+    <body>
+        <style>
+            .d1 {
+                background-color: green;
+                display: inline-block;
+            }
+        </style>
+        <span id="d1" class="d1" style="color: #fff">hello world</span>
+        <div style="display: flex; column-gap: 20px">
+            <div>
+                <p>Print all css proterty and value for the above element:</p>
+                <textarea id="t1" rows="20" style="width: 400px; line-height: 1.5"></textarea>
+                <script>
+                    (() => {
+                        const d1 = document.querySelector('#d1');
+                        const t1 = document.querySelector('#t1');
+
+                        const styles = d1.computedStyleMap();
+
+                        for (const [p, v] of styles) {
+                            t1.append(`${p}: ${v}\n`);
+                        }
+                    })();
+                </script>
+            </div>
+            <div>
+                <p>Print specific css proterty and value for the above element:</p>
+                <textarea id="t2" rows="20" style="width: 400px; line-height: 1.5"></textarea>
+                <script>
+                    (() => {
+                        const d1 = document.querySelector('#d1');
+                        const t1 = document.querySelector('#t2');
+
+                        const styles = d1.computedStyleMap();
+                        const keys = ['color', 'background-color', 'display'];
+
+                        for (const key of keys) {
+                            t1.append(`${key}: ${styles.get(key)}\n`);
+                        }
+                    })();
+                </script>
+            </div>
+        </div>
+        <hr />
+        <span id="d2">hello world</span>
+        <br />
+        <br />
+        <input id="input2" type="color" />
+        <button
+            onclick="javascript:document.querySelector('#d2').attributeStyleMap.set('color', document.querySelector('#input2').value);"
+        >
+            change the element color
+        </button>
+    </body>
+</html>

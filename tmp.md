@@ -1,40 +1,73 @@
 <!--hexo
 
 ---
-url: web-api-CSS_Properties_and_Values_API
+url: web-api-CSS_Typed_OM_API
 tags:
   - webapi
-  - CSS Properties and Values
+  - CSS Typed OM
 ---
 
 -->
 
-# CSS Properties and Values
+# CSS Typed OM
 
-> MDN: https://developer.mozilla.org/en-US/docs/Web/API/CSS_Properties_and_Values_API
+> MDN: https://developer.mozilla.org/en-US/docs/Web/API/CSS_Typed_OM_API
 
-**CSS Properties and Values**用于为CSS扩展属性，
+**CSS Typed OM**全称`CSS Typed Object Model`，提供了一系列访问和操作CSS值的方法。
 
-> 和`CSS variables`有类似点，但后者只是一个变量，没有CSS属性之特性：比如继承特性。
+在以往，使用`HTMLElement.style`管理元素的样式，它只是一个`string`类型，管理很笨拙，可读性也差。而本API将CSS值解析为可读性很高的对象，据此可以科学的管理它。
+
+> 和`HTMLElement.style`相比，本API更有可读性，性能更高。
 
 ## 接口
 
-### CSSPropertyRule
+有公用类型`CSSStyleValue`和若干特殊类型如`CSSImageValue`、`CSSKeywordValue`等组成。
 
-属性和值的定义描述。
+### CSSStyleValue
 
-> syntax选项标识了值的预期语法，如`<color>`。
+它是所有CSS值类型的公用类型，提供了`parse`方法将一个字符串解析成样式对象，例：
 
-## 方法
+```javascript
+// 返回 CSSStyleValue 类型
+CSSStyleValue.parse('color', '#f00');
+// 返回 CSSTransformValue 类型
+CSSStyleValue.parse('transform', 'translate(30px, 20px) rotate(45deg)');
+```
 
-### registerProperty
+### CSSKeywordValue
 
-创建自定义css属性。
+CSS保留关键字类型如`initial`，例：
+
+```javascript
+// 返回 CSSKeywordValue {value: 'normal'} 类型，因为normal是保留关键字。
+$0.computedStyleMap().get('font-style');
+```
+
+### 其他类型见MDN
+
+### StylePropertyMapReadOnly
+
+提供`get`、`getAll`等方法读取样式。
+
+### StylePropertyMap
+
+继承于`StylePropertyMapReadOnly`，提供`append`、`set`等方法操作样式，如：
+
+```javascript
+// 将元素的文本颜色设置为红色
+$0.attributeStyleMap.set('color', 'red');
+```
+
+## 方法和属性
+
+### computedStyleMap
+
+`HTMLelement.computedStyleMap()`返回`StylePropertyMapReadOnly`类型。
+
+### attributeStyleMap
+
+`HTMLElement.attributeStyleMap`返回`StylePropertyMap`类型。
 
 ## 示例
 
-示例：https://taoliujun.github.io/example/web-api/CSS_Properties_and_Values_API/index.html
-
-1. 两个Div使用了一样的样式，但`registerProperty`注册了**非继承**的属性，所以`.parent1 .item1`并未继承`.parent1`中设置的属性值，而使用了默认值。
-
-![image](https://github.com/taoliujun/blog/assets/5689134/9caf3326-17d2-4390-8484-5ec5e2ea835e)
+示例：https://taoliujun.github.io/example/web-api/CSS_Typed_OM_API/index.html

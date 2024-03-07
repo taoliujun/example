@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Clipboard_API - Web API</title>
+    </head>
+
+    <body>
+        <input type="text" value="hello world" /><button
+            onclick="javascript:navigator.clipboard.writeText(this.previousElementSibling.value);"
+        >
+            copy a text
+        </button>
+        <br />
+        <br />
+        <input type="text" value="" /><button
+            onclick="javascript:navigator.clipboard.readText().then((res) =>  {
+                this.previousElementSibling.value = res
+            });"
+        >
+            paste a text
+        </button>
+        <hr />
+        <script>
+            function copyCanvas() {
+                const cvs = document.querySelector('#c1');
+                const ctx = cvs.getContext('2d');
+                ctx.fillStyle = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                ctx.fillRect(0, 0, 100, 100);
+
+                cvs.toBlob((blob) => {
+                    const data = [new ClipboardItem({ [blob.type]: blob })];
+                    navigator.clipboard.write(data);
+                });
+            }
+        </script>
+        <canvas width="100" height="100" id="c1" style="border: 1px solid #000"></canvas>
+        <br />
+        <button onclick="javascript:copyCanvas();">copy canvas with random color</button>
+        <br />
+        <br />
+        <script>
+            function pasteBlob() {
+                const cvs = document.querySelector('#c2');
+
+                navigator.clipboard.read().then((res) => {
+                    for (const item of res) {
+                        console.log('item', item);
+                        item.getType('image/png').then((blob) => {
+                            cvs.setAttribute('src', URL.createObjectURL(blob));
+                        });
+                    }
+                });
+            }
+        </script>
+        <img id="c2" style="border: 1px solid #000" />
+        <br />
+        <button onclick="javascript:pasteBlob();">paste blob into a canvas</button>
+    </body>
+</html>

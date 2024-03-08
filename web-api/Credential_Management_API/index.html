@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Credential_Management_API - Web API</title>
+        <style>
+            body {
+                word-break: break-all;
+            }
+        </style>
+    </head>
+
+    <body>
+        <script>
+            function submitHandle(form) {
+                const f = new FormData(form);
+                const cred = new PasswordCredential({
+                    id: f.get('username'),
+                    name: f.get('username'),
+                    password: f.get('password'),
+                });
+                navigator.credentials.store(cred).then(console.log).catch(console.err);
+            }
+        </script>
+
+        <form id="form1" method="post" action="#" autocomplete="off">
+            username: <input type="text" name="username" /><br />
+            password: <input type="password" name="password" /><br />
+            <button onclick="javascript:event.preventDefault();submitHandle(this.parentElement);">login</button>
+        </form>
+
+        <p id="p1"></p>
+        <button onclick="getCred()">get password credential</button>
+        <script>
+            function getCred() {
+                navigator.credentials
+                    .get({
+                        password: true,
+                    })
+                    .then((res) => {
+                        console.log('==cred', res);
+                        if (!res) {
+                            return;
+                        }
+                        const obj = { type: res.type, id: res.id, name: res.name, password: res.password };
+                        document.querySelector('#p1').textContent = JSON.stringify(obj);
+                    });
+            }
+        </script>
+    </body>
+</html>

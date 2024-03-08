@@ -5,14 +5,14 @@
     </head>
 
     <body>
-        <input type="text" value="hello world" /><button
+        <input type="text" value="hello world" style="width: 400px" /><button
             onclick="javascript:navigator.clipboard.writeText(this.previousElementSibling.value);"
         >
             copy a text
         </button>
         <br />
         <br />
-        <input type="text" value="" /><button
+        <input type="text" value="" style="width: 400px" /><button
             onclick="javascript:navigator.clipboard.readText().then((res) =>  {
                 this.previousElementSibling.value = res
             });"
@@ -35,7 +35,7 @@
         </script>
         <canvas width="100" height="100" id="c1" style="border: 1px solid #000"></canvas>
         <br />
-        <button onclick="javascript:copyCanvas();">copy canvas with random color</button>
+        <button onclick="javascript:copyCanvas();">copy canvas blob with random color</button>
         <br />
         <br />
         <script>
@@ -54,6 +54,8 @@
         </script>
         <img id="c2" style="border: 1px solid #000" />
         <br />
-        <button onclick="javascript:pasteBlob();">paste blob into a canvas</button>
+        <button onclick="javascript:pasteBlob();">paste blob into a img</button>
+        <br />
+        You can also copy an image from the chat App, but not copy a image file, and then click the button above.
     </body>
 </html>

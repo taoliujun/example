@@ -1,25 +1,44 @@
 <!--hexo
 
 ---
-url: web-api-CSS_Object_Model
+url: web-api-Clipboard_API
 tags:
   - webapi
-  - CSSOM
+  - Clipboard
 ---
 
 -->
 
-# CSSOM
+# Clipboard
 
-> MDN: https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model
+> MDN: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
 
-**CSSOM**全称`CSS Object Model`，它是CSS相关管理接口、事件的合集，例如：
+**Clipboard**提供了对系统剪切板的读取、写入方法。
 
--   CSS单条规则的接口`CSSRule`。
--   提供高亮方法`registerProperty`的`CSS`接口。
--   `window.screen`返回的`Screen`接口。
--   `addEventListener("animationend")`事件处理。
+> 不要再使用`document.execCommand()`了。
 
-> 类似DOM，也是一系列接口的合集。
+## 接口
 
-这里不一一说明，需要实践具体接口。
+### Clipboard
+
+使用`Navigator.cliboard`可得到`Clipboard`接口实例，提供了`read`和`write`方法。另外，`readText`和`writeText`方法是一对读取写入文本信息的快捷方法。
+
+### ClipboardItem
+
+剪切板数据对象，包含了数据类型`type`（如`image/png`）和数据流`blob`。
+
+## 方法和属性
+
+略，见示例。
+
+## 示例
+
+示例：https://taoliujun.github.io/example/web-api/Clipboard_API/index.html
+
+1. 复制输入框的文本到系统剪切板中、或从系统剪切板中读取：
+
+![image](https://github.com/taoliujun/blog/assets/5689134/007c9e39-b66b-4910-ad55-e4391c4088bd)
+
+2. 复制canvas的图像数据到剪切板、或从剪切板中读取：
+
+![image](https://github.com/taoliujun/blog/assets/5689134/852608b5-dc86-4c24-9748-55004fee34ce)

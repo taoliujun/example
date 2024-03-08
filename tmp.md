@@ -1,31 +1,31 @@
 <!--hexo
 
 ---
-url: web-api-Clipboard_API
+url: web-api-Cookie_Store_API
 tags:
   - webapi
-  - Clipboard
+  - CookieStore
 ---
 
 -->
 
-# Clipboard
+# CookieStore
 
-> MDN: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
+> MDN: https://developer.mozilla.org/en-US/docs/Web/API/Cookie_Store_API
 
-**Clipboard**提供了对系统剪切板的读取、写入方法。
-
-> 不要再使用`document.execCommand()`了。
+**CookieStore**提供了对cookie的读取写入。相比`document.cookies`管理cookie的笨拙，本API更为明了。
 
 ## 接口
 
-### Clipboard
+### CookieStore
 
-使用`Navigator.cliboard`可得到`Clipboard`接口实例，提供了`read`和`write`方法。另外，`readText`和`writeText`方法是一对读取写入文本信息的快捷方法。
+使用`window.cookieStore`可获取本接口实例，提供了`get`、`set`、`getAll`、`delete`方法管理cookie，并支持cookie的所有特性如domain、path、expires等。
 
-### ClipboardItem
+且还提供了`change`、`delete`事件监听。
 
-剪切板数据对象，包含了数据类型`type`（如`image/png`）和数据流`blob`。
+### CookieStoreManager
+
+订阅cookie变动。
 
 ## 方法和属性
 
@@ -33,12 +33,12 @@ tags:
 
 ## 示例
 
-示例：https://taoliujun.github.io/example/web-api/Clipboard_API/index.html
+示例：https://taoliujun.github.io/example/web-api/Cookie_Store_API/index.html
 
-1. 复制输入框的文本到系统剪切板中、或从系统剪切板中读取：
+1. 写入、读取永久的cookie：
 
-![image](https://github.com/taoliujun/blog/assets/5689134/007c9e39-b66b-4910-ad55-e4391c4088bd)
+![image](https://github.com/taoliujun/blog/assets/5689134/d72df988-15d3-4214-ae9a-a6184cb5ba3e)
 
-2. 复制canvas的图像数据到剪切板、或从剪切板中读取：
+2. 写入、读取会过期的cookie：
 
-![image](https://github.com/taoliujun/blog/assets/5689134/852608b5-dc86-4c24-9748-55004fee34ce)
+![image](https://github.com/taoliujun/blog/assets/5689134/9a89eb49-7a7f-40f3-b523-6ce5bead38cd)

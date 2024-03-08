@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Cookie_Store_API - Web API</title>
+    </head>
+
+    <body>
+        <style>
+            body {
+                word-break: break-all;
+            }
+        </style>
+        <button onclick="javascript:window.cookieStore.set('test1', new Date().toLocaleString());">set cookie</button>
+        <br />
+        <br />
+        <button
+            onclick="javascript:window.cookieStore.get('test1').then((res)=>{
+            this.nextElementSibling.textContent = JSON.stringify(res)
+        });"
+        >
+            get cookie above
+        </button>
+        <p></p>
+        <hr />
+        <button
+            onclick="javascript:window.cookieStore.set({
+            name: 'test2',
+            value: new Date().toLocaleString(),
+            expires: new Date().getTime() + 5 * 1000
+        });"
+        >
+            set cookie due in 5 seconds
+        </button>
+        <br />
+        <br />
+        <button
+            onclick="javascript:window.cookieStore.get('test2').then((res)=>{
+            this.nextElementSibling.textContent = JSON.stringify(res)
+        });"
+        >
+            get cookie above
+        </button>
+        <p></p>
+    </body>
+</html>

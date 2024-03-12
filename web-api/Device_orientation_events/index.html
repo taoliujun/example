@@ -15,6 +15,12 @@
         <script>
             const dom = document.querySelector('#d1');
 
+            const infoMaps = {
+                devicemotion: ['acceleration', 'accelerationIncludingGravity', 'rotationRate', 'interval'],
+                deviceorientation: ['absolute', 'alpha', 'beta', 'gamma'],
+                deviceorientationabsolute: ['absolute', 'alpha', 'beta', 'gamma'],
+            };
+
             function printEvt(evtName) {
                 const tNode = document.createElement('h2');
                 tNode.textContent = evtName;
@@ -26,7 +32,13 @@
 
                 window.addEventListener(evtName, (e) => {
                     console.log(`==${evtName}`, e);
-                    cNode.textContent = JSON.stringify(e);
+                    cNode.textContent = JSON.stringify(
+                        infoMaps[evtName].map((v) => {
+                            return {
+                                [v]: e[v],
+                            };
+                        }),
+                    );
                 });
             }
         </script>

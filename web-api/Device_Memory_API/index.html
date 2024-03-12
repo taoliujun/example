@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Device_Memory_API - Web API</title>
+        <style>
+            body {
+                word-break: break-all;
+            }
+        </style>
+    </head>
+
+    <body>
+        <button onclick="getMemoryInfo()">get memory info</button>
+        <p id="p1"></p>
+        <script>
+            function getMemoryInfo() {
+                document.querySelector('#p1').textContent =
+                    `This device has at least ${navigator.deviceMemory}GiB of RAM.`;
+            }
+        </script>
+    </body>
+</html>

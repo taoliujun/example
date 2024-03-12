@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>EyeDropper_API - Web API</title>
+        <style>
+            body {
+                word-break: break-all;
+            }
+        </style>
+    </head>
+
+    <body>
+        <script>
+            function onClickHandle() {
+                const d = document.querySelector('#d1');
+
+                const eye = new EyeDropper();
+                eye.open()
+                    .then((res) => {
+                        d.textContent = JSON.stringify(res);
+                        d.attributeStyleMap.set('background-color', res.sRGBHex);
+                    })
+                    .catch((err) => {
+                        d.textContent = JSON.stringify(err);
+                    });
+            }
+        </script>
+        <div id="d1" style="border: 1px solid #000; height: 200px; width: 200px"></div>
+        <br />
+        <button onclick="onClickHandle()">open Picture-in-Picture</button>
+    </body>
+</html>

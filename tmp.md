@@ -1,41 +1,26 @@
 <!--hexo
 
 ---
-url: web-api-Document_Picture-in-Picture_API
+url: web-api-EyeDropper_API
 tags:
   - webapi
-  - Document Picture-in-Picture
+  - EyeDropper
 ---
 
 -->
 
-# Document Picture-in-Picture
+# EyeDropper
 
-> MDN: https://developer.mozilla.org/en-US/docs/Web/API/Document_Picture-in-Picture_API
+> MDN: https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper_API
 
-**Document Picture-in-Picture**画中画用于在窗口中再开一个悬浮的窗口，视频悬浮在右下角就是典型的画中画，它有几点特性：
-
--   不同于frame，它始终悬浮在最上层。
--   随着主窗口关闭而自动销毁。
--   没有导航特性。
--   和主窗口没有任何干扰。
+**EyeDropper**提供了颜色吸管工具。
 
 ## 接口
 
-### DocumentPictureInPicture
+### EyeDropper
 
-它包含了`window`属性，和`requestWindow()`方法。
-
-### DocumentPictureInPictureEvent
-
-相关事件。
-
-## 方法和属性
-
-### Window.documentPictureInPicture
-
-返回`DocumentPictureInPicture`接口实例。
+颜色吸管接口，包含了`open`方法。
 
 ## 示例
 
-示例：https://taoliujun.github.io/example/web-api/Document_Picture-in-Picture_API/index.html
+示例：https://taoliujun.github.io/example/web-api/EyeDropper_API/index.html

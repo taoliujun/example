@@ -1,74 +1,41 @@
 <!--hexo
 
 ---
-url: web-api-Device_orientation_events
+url: web-api-Document_Picture-in-Picture_API
 tags:
   - webapi
-  - Device Orientation
+  - Document Picture-in-Picture
 ---
 
 -->
 
-# Device Orientation
+# Document Picture-in-Picture
 
-> MDN: https://developer.mozilla.org/en-US/docs/Web/API/Device_orientation_events
+> MDN: https://developer.mozilla.org/en-US/docs/Web/API/Document_Picture-in-Picture_API
 
-**Device Orientation**用于获取设备的方向、和运动信息。移动设备的加速度传感器、陀螺仪、指南针等组件为浏览器提供了一系列运动信息，可以监听事件获取到相关信息。
+**Document Picture-in-Picture**画中画用于在窗口中再开一个悬浮的窗口，视频悬浮在右下角就是典型的画中画，它有几点特性：
 
-> 三轴指的是手机沿着北方向竖向平放在桌子上，左右是X轴，上下是Y轴，高低是Z轴。
+-   不同于frame，它始终悬浮在最上层。
+-   随着主窗口关闭而自动销毁。
+-   没有导航特性。
+-   和主窗口没有任何干扰。
 
 ## 接口
 
-下面的接口里的数据概念有所类似但又有细节差异，使用时仔细参考官方文档。
+### DocumentPictureInPicture
 
-### DeviceMotionEvent
+它包含了`window`属性，和`requestWindow()`方法。
 
-设备的加速度和旋转速率的变化事件。包含以下信息：
+### DocumentPictureInPictureEvent
 
--   `acceleration`，加速度，不包括重力计算。
--   `accelerationIncludingGravity`，加速度，包括重力计算。
--   `interval`，获取数据的频率，单位毫秒。
--   `rotationRate`，三个轴上的速率。
-
-### DeviceMotionEventAcceleration
-
-设备在三个轴上的加速度量的变化事件。包含以下信息：
-
--   `z`，Z轴变化量。
--   `x`，X轴变化量。
--   `y`，Y轴变化量。
-
-### DeviceMotionEventRotationRate
-
-设备在三个轴的旋转速率的变化事件。包含以下信息：
-
--   `alpha`，Z轴速率，即每秒变化量。
--   `beta`，X轴速率。
--   `gamma`，Y轴速率。
-
-### DeviceOrientationEvent
-
-设备物理方向的变化事件。包含了以下信息：
-
--   `absolute`，数据信息是否是绝对量（地球坐标）。
--   `alpha`，Z轴变化量。
--   `beta`，X轴变化量。
--   `gamma`，Y轴变化量。
+相关事件。
 
 ## 方法和属性
 
-### Event.devicemotion
+### Window.documentPictureInPicture
 
-事件监听，返回`DeviceMotionEvent`。
-
-### Event.deviceorientation
-
-事件监听，返回`DeviceOrientationEvent`
-
-### Event.deviceorientationabsolute
-
-事件监听，返回`DeviceOrientationEvent`
+返回`DocumentPictureInPicture`接口实例。
 
 ## 示例
 
-示例：https://taoliujun.github.io/example/web-api/Device_orientation_events/index.html
+示例：https://taoliujun.github.io/example/web-api/Document_Picture-in-Picture_API/index.html

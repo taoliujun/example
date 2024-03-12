@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Document_Picture-in-Picture_API - Web API</title>
+        <style>
+            body {
+                word-break: break-all;
+            }
+        </style>
+    </head>
+
+    <body>
+        <script>
+            async function openPiP() {
+                const d = document.querySelector('#d1');
+                const w1 = await window.documentPictureInPicture.requestWindow({
+                    width: 300,
+                    height: 300,
+                });
+                w1.document.body.append(document.importNode(d, true));
+            }
+        </script>
+        <div id="d1">A hook here.</div>
+        <br />
+        <button onclick="openPiP()">open Picture-in-Picture</button>
+        <div style="height: 300vh"></div>
+    </body>
+</html>

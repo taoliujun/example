@@ -1,26 +1,74 @@
 <!--hexo
 
 ---
-url: web-api-Device_Memory_API
+url: web-api-Device_orientation_events
 tags:
   - webapi
-  - Device Memory
+  - Device Orientation
 ---
 
 -->
 
-# Device Memory
+# Device Orientation
 
-> MDN: https://developer.mozilla.org/en-US/docs/Web/API/Device_Memory_API
+> MDN: https://developer.mozilla.org/en-US/docs/Web/API/Device_orientation_events
 
-**Device Memory**获取设备可用的内存大小，这是一个大约量。
+**Device Orientation**用于获取设备的方向、和运动信息。移动设备的加速度传感器、陀螺仪、指南针等组件为浏览器提供了一系列运动信息，我们可以监听事件获取到相关信息。
+
+三轴指的是手机平放在桌子上，左右是X轴，上下是Y轴，高低是Z轴。
+
+## 接口
+
+下面的接口里的数据概念有所类似但又有细节差异，使用时仔细参考官方文档。
+
+### DeviceMotionEvent
+
+设备的加速度和旋转速率的变化事件。包含以下信息：
+
+-   `acceleration`，加速度，不包括重力计算。
+-   `accelerationIncludingGravity`，加速度，包括重力计算。
+-   `interval`，获取数据的频率，单位毫秒。
+-   `rotationRate`，三个轴上的速率。
+
+### DeviceMotionEventAcceleration
+
+设备在三个轴上的加速度量的变化事件。包含以下信息：
+
+-   `z`，Z轴变化量。
+-   `x`，X轴变化量。
+-   `y`，Y轴变化量。
+
+### DeviceMotionEventRotationRate
+
+设备在三个轴的旋转速率的变化事件。包含以下信息：
+
+-   `alpha`，Z轴速率，即每秒变化量。
+-   `beta`，X轴速率。
+-   `gamma`，Y轴速率。
+
+### DeviceOrientationEvent
+
+设备物理方向的变化事件。包含了以下信息：
+
+-   `absolute`，数据信息是否是绝对量（地球坐标）。
+-   `alpha`，Z轴变化量。
+-   `beta`，X轴变化量。
+-   `gamma`，Y轴变化量。
 
 ## 方法和属性
 
-### Navigator.deviceMemory
+### Event.devicemotion
 
-内存可用容量，单位是GB，数值是2的次方：0.25, 0.5, 1, 2, 4, 8。
+事件监听，返回`DeviceMotionEvent`。
+
+### Event.deviceorientation
+
+事件监听，返回`DeviceOrientationEvent`
+
+### Event.deviceorientationabsolute
+
+事件监听，返回`DeviceOrientationEvent`
 
 ## 示例
 
-示例：https://taoliujun.github.io/example/web-api/Device_Memory_API/index.html
+示例：https://taoliujun.github.io/example/web-api/Device_orientation_events/index.html

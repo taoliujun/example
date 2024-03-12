@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Device_orientation_events - Web API</title>
+        <style>
+            body {
+                word-break: break-all;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="d1"></div>
+
+        <script>
+            const dom = document.querySelector('#d1');
+
+            function printEvt(evtName) {
+                const tNode = document.createElement('h2');
+                tNode.textContent = evtName;
+                dom.append(tNode);
+
+                const cNode = document.createElement('div');
+                cNode.textContent = '';
+                dom.append(cNode);
+
+                window.addEventListener(evtName, (e) => {
+                    console.log(`==${evtName}`, e);
+                    cNode.textContent = JSON.stringify(e);
+                });
+            }
+        </script>
+
+        <script>
+            printEvt('devicemotion');
+            printEvt('deviceorientation');
+            printEvt('deviceorientationabsolute');
+        </script>
+    </body>
+</html>

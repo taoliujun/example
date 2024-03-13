@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>File_API - Web API</title>
+        <style>
+            body {
+                word-break: break-all;
+            }
+        </style>
+    </head>
+
+    <body>
+        <script>
+            function onFileChange(e) {
+                const d = document.querySelector('#d1');
+                const file = e.files[0];
+
+                console.info('==file', file);
+
+                d.textContent = '';
+
+                d.append(
+                    document.createTextNode(`
+                    File information:
+                    name: ${file.name}, 
+                    size: ${file.size},
+                    type: ${file.type}
+                    `),
+                );
+                d.append(document.createElement('hr'));
+
+                const r = new FileReader();
+                r.addEventListener('loadend', (res) => {
+                    let d1;
+                    if (file.type.includes('image/')) {
+                        d1 = document.createElement('img');
+                        d1.src = URL.createObjectURL(file);
+                    } else if (file.type.includes('text/') || !file.type) {
+                        d1 = document.createElement('pre');
+                        d1.textContent = r.result;
+                    } else {
+                        d1 = document.createElement('div');
+                        d1.textContent = `file type is ${file.type}, can't be render.`;
+                    }
+
+                    d.append(d1);
+                });
+                r.readAsText(file);
+            }
+        </script>
+        <input type="file" onchange="javascript:onFileChange(this);" />
+        <br />
+        <div id="d1"></div>
+    </body>
+</html>

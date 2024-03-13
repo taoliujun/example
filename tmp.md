@@ -1,26 +1,52 @@
 <!--hexo
 
 ---
-url: web-api-EyeDropper_API
+url: web-api-File_API
 tags:
   - webapi
-  - EyeDropper
+  - File
 ---
 
 -->
 
-# EyeDropper
+# File
 
-> MDN: https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper_API
+> MDN: https://developer.mozilla.org/en-US/docs/Web/API/File_API
 
-**EyeDropper**提供了颜色吸管工具。
+**File**用于读取用户通过`<input type="file"/>`选择、或`DataTransfer`拖拽的文件。
 
 ## 接口
 
-### EyeDropper
+### Blob
 
-颜色吸管接口，包含了`open`方法。
+文件的原始数据接口，可以用`text`、`stream`方法处理成文本或二进制流。
+
+### File
+
+文件接口。包含文件信息`size`、`type`等，还包含了`Blob`原始数据。
+
+### FileList
+
+File list。
+
+### FileReader
+
+读取文件的接口，包含`readAsDataURL`、`readAsText`等方法来读取文件，通过`errer`、`load`、`progress`等事件监听读取结果，结果中包含了`result`、`reayState`等信息。
+
+### FileReaderSync
+
+FileReader的同步版本。
+
+## 属性和方法
+
+### URL.createObjectURL
+
+将`File`或`Blob`转成url字符串。
+
+### URL.revokeObjectURL
+
+将url字符串转成`Blob`对象。
 
 ## 示例
 
-示例：https://taoliujun.github.io/example/web-api/EyeDropper_API/index.html
+示例：https://taoliujun.github.io/example/web-api/File_API/index.html

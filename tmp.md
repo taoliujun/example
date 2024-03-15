@@ -1,46 +1,52 @@
 <!--hexo
 
 ---
-url: web-api-Fullscreen_API
+url: web-api-Geolocation_API
 tags:
   - webapi
-  - Fullscreen
+  - Geolocation
 ---
 
 -->
 
-# Fullscreen
+# Geolocation
 
-> MDN: https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
+> MDN: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
 
-**Fullscreen**可设置元素全屏，或退出全屏。
-
-> 全屏元素只能有一个。
+**Geolocation**获取设备的地理位置信息，包括了纬度、经度、海拔、经纬度的精度范围（米）、海拔的精度范围（米），以及设备的面朝方位度数和速度。
 
 ## 接口
 
-无。
+### Geolocation
+
+地理定位接口，提供了几个方法：
+
+-   `getCurrentPosition` 获取地理定位信息，返回`GeolocationPosition`。
+-   `watchPosition` 监听地理定位信息，返回`GeolocationPosition`。
+-   `clearWatch` 停止监听。
+
+### GeolocationCoordinates
+
+定位信息，包含经纬度等。
+
+### GeolocationPosition
+
+定位信息，包含`timestamp`和`GeolocationCoordinates`。
+
+### GeolocationPositionError
+
+定位异常信息，如用户拒绝，定位超时。
 
 ## 属性和方法
 
-### Document.fullscreenElement
+### Navigator.geolocation
 
-返回当前进入全屏的元素节点。
-
-### Element.requestFullscreen()
-
-将节点进入全屏。
-
-### Document.exitFullscreen()
-
-退出全屏。
-
-## 事件
-
-### fullscreenchange
-
-全屏状态变化的事件，在事件回调中，访问`Document.fullscreenElement`可判断是否处于全屏状态。
+返回`Geolocation`。
 
 ## 示例
 
-示例：https://taoliujun.github.io/example/web-api/Fullscreen_API/index.html
+示例：https://taoliujun.github.io/example/web-api/Geolocation_API/index.html
+
+1. 打印位置信息。
+
+![image](https://github.com/taoliujun/blog/assets/5689134/0eee3be8-2880-406a-acc9-0b5c50512fc8)

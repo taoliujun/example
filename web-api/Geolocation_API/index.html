@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Geolocation_API</title>
+        <style>
+            body {
+                word-break: break-all;
+            }
+        </style>
+        <script src="https://cdn.jsdelivr.net/npm/lodash"></script>
+    </head>
+
+    <body>
+        <p>You can change Location via Sensors in the devtools.</p>
+        <script>
+            function onGetCurrentPosition(dom) {
+                const d = dom.previousElementSibling;
+                navigator.geolocation.getCurrentPosition(
+                    (e) => {
+                        console.log('==getCurrentPosition result', e);
+                        d.textContent = JSON.stringify(_.toPlainObject(e.coords));
+                    },
+                    (e) => {
+                        console.error('==getCurrentPosition error', e);
+                        d.textContent = JSON.stringify(_.toPlainObject(e));
+                    },
+                );
+            }
+        </script>
+        <div>
+            <h2>current position</h2>
+            <p></p>
+            <button type="button" onclick="javascript:onGetCurrentPosition(this);">get current position</button>
+        </div>
+        <br /><br />
+        <script>
+            let geoWatchHandle;
+            function onWatchCurrentPosition(dom) {
+                const d = dom.previousElementSibling;
+                geoWatchHandle = navigator.geolocation.watchPosition(
+                    (e) => {
+                        console.log('==watchPosition result', e);
+                        d.textContent = e.timestamp + ':' + JSON.stringify(_.toPlainObject(e.coords));
+                    },
+                    (e) => {
+                        console.error('==watchPosition error', e);
+                        d.textContent = JSON.stringify(_.toPlainObject(e));
+                    },
+                );
+            }
+
+            function onClearWatch() {
+                navigator.geolocation.clearWatch(geoWatchHandle);
+            }
+        </script>
+        <div>
+            <h2>watch position</h2>
+            <p></p>
+            <button type="button" onclick="javascript:onWatchCurrentPosition(this);">watch position</button>&nbsp;
+            <button type="button" onclick="javascript:onClearWatch();">stop watch</button>
+        </div>
+    </body>
+</html>

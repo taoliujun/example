@@ -4,7 +4,7 @@
 url: web-api-HTML_Drag_and_Drop_API
 tags:
   - webapi
-  - Drag
+  - Drag Drop
 ---
 
 -->

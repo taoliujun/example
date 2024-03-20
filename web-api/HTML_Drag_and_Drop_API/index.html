@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>HTML_Drag_and_Drop_API</title>
+        <style>
+            body {
+                word-break: break-all;
+            }
+        </style>
+    </head>
+
+    <body>
+        <section>
+            <h2>Base Drag And Drop</h2>
+            <p
+                id="p1"
+                style="color: blue; border: 1px solid black"
+                ondragstart="dragstart_handler(event);"
+                draggable="true"
+            >
+                Select this element, drag it to the Drop Zone and then release the selection to copy the element.
+            </p>
+            <div
+                style="background-color: yellow; padding: 40px"
+                ondrop="drop_handler(event);"
+                ondragover="dragover_handler(event);"
+            >
+                Drop Zone
+            </div>
+            <script>
+                function dragstart_handler(ev) {
+                    ev.dataTransfer.setData('text/plain', ev.currentTarget.id);
+                    ev.dataTransfer.effectAllowed = 'all';
+                }
+
+                function drop_handler(ev) {
+                    ev.preventDefault();
+                    const data = ev.dataTransfer.getData('text/plain');
+                    ev.target.append(document.querySelector(`#${data}`).cloneNode(true));
+                }
+
+                function dragover_handler(ev) {
+                    ev.preventDefault();
+                    ev.dataTransfer.dropEffect = 'copy';
+                }
+            </script>
+        </section>
+        <hr />
+        <section>
+            <h2>Set Drag Image</h2>
+            <p style="color: blue; border: 1px solid black" ondragstart="dragstart_handler1(event);" draggable="true">
+                Select this element to show a drag image.
+            </p>
+            <script>
+                const dragImage = new Image();
+                dragImage.src = './1.png';
+                function dragstart_handler1(ev) {
+                    ev.dataTransfer.setDragImage(dragImage, 100, 100);
+                }
+            </script>
+        </section>
+        <hr />
+        <section>
+            <h2>Drag A File</h2>
+            <div
+                style="background-color: yellow; padding: 40px"
+                ondrop="drop_handler2(event);"
+                ondragover="dragover_handler2(event);"
+            >
+                Drag a file and drop it here.
+            </div>
+            <div id="d2"></div>
+            <script>
+                function drop_handler2(ev) {
+                    ev.preventDefault();
+                    const file = ev.dataTransfer.files[0];
+                    console.log('==', file);
+                    document.querySelector('#d2').textContent = `
+                        File information:
+                        name: ${file.name}, 
+                        size: ${file.size},
+                        type: ${file.type}
+                        `;
+                }
+
+                function dragover_handler2(ev) {
+                    ev.preventDefault();
+                }
+            </script>
+        </section>
+    </body>
+</html>

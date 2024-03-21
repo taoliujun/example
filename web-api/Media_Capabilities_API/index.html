@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Media_Capabilities_API</title>
+        <style>
+            body {
+                word-break: break-all;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div></div>
+        <button type="button" onclick="javascript:checkDecodeingInfo(this);">check decodeingInfo</button>
+        <script>
+            function checkDecodeingInfo(dom) {
+                const printDom = dom.previousElementSibling;
+                navigator.mediaCapabilities
+                    .decodingInfo({
+                        type: 'file',
+                        video: {
+                            contentType: 'video/mp4; codecs="avc1.4d002a"', // valid content type
+                            width: 800, // width of the video
+                            height: 600, // height of the video
+                            bitrate: 1000, // number of bits used to encode 1s of video
+                            framerate: 30, // number of frames making up that 1s.
+                        },
+                    })
+                    .then((res) => {
+                        console.log('==', res);
+                        printDom.textContent = JSON.stringify(res);
+                    });
+            }
+        </script>
+    </body>
+</html>

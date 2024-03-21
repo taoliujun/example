@@ -1,85 +1,60 @@
 <!--hexo
 
 ---
-url: web-api-HTML_Drag_and_Drop_API
+url: web-api-Intersection_Observer_API
 tags:
   - webapi
-  - Drag Drop
+  - Intersection Observer
 ---
 
 -->
 
-# HTML Drag And Drop
+# Intersection Observer
 
-> MDN: https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
+> MDN: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 
-**HTML Drag And Drop**允许在浏览器中拖放元素。
+**Intersection Observer**用于检测目标元素与祖先元素或顶级文档的视口相交情况的变化。主要用于：
 
-**为方便描述，假设可拖动的元素为A，可被放置的元素是B。**
+-   图片懒加载。
+-   无限滚动。
+-   元素可见度埋点。
 
 ## 接口
 
-### DataTransfer
+### IntersectionObserver
 
-拖放过程的数据对象接口，由`Event.dataTransfer`暴露，它有如下属性：
+相交观察器接口，实例化的时候接受一个回调函数，和一个配置项。
 
-#### dropEffect
+> 观察是异步的，所以回调函数执行时获取的相交信息，不是实时的。
 
-拖放过程中，在B上给用户的反馈，通常在`dragenter`事件中设置该属性，有几个值：
+回调函数包含了两个入参：
 
--   copy，生成A副本，通常的反馈表现是将光标变成一个`+`的标志。
--   move，移动A，通常的反馈表现是将光标变成一个`箭头`的标志。
--   link，建立A的链接，通常的反馈表现是将光标变成一个`左镜像箭头`的标志。
--   none，禁止拖放，通常的反馈表现是将源项变成灰色。
+-   entries，`IntersectionObserverEntry`接口集合。
+-   observer，本实例。
+-   配置项包含属性：
 
-> 除了`none`会禁止放置行为，其他值仅仅会产生视觉表现，实际的放置行为由`drop`事件的回调函数里决定。
+-   root，必须是被观察元素的祖先元素，或`null`表示为顶级文档。被观察元素将与该元素相交。
+-   rootMargin，计算交叉时偏移。默认为`0 0 0 0`。
+-   threshold，相交比例阈值，0-1，表示相交比例达到多少时会触发回调函数，默认为`0`。
 
-#### effectAllowed
+本接口实例返回了一系列属性，如`root`、`rootMargin`等，意义同入参配置项。还返回了一系列方法如下：
 
-拖放过程中，在A上给用户的反馈，通常在`dragstart`事件中设置该属性，有几个值：
+-   observe，加入一个被观察元素。
+-   unobserve，移除一个被观察元素。
+-   disconnect，停止观察。
+-   takeRecords，返回被观察者集合的相交信息。
 
--   none，不允许拖放。
--   copy，生成A副本。
--   link，可以在新地方建立与A的链接。
--   move，可移动A。
--   copyLink，允许 copy 或者 link 操作。
--   copyMove，允许 copy 或者 move 操作。
--   linkMove，允许 link 或者 move 操作。
--   all，允许所有的操作。
+### IntersectionObserverEntry
 
-#### files
+某一时刻的相交信息，包含了一系列属性：
 
-拖放的文件列表，返回`File[]`，此功能可用于将文件拖动到浏览器。
-
-#### items
-
-拖放操作中，数据传输项的列表，返回`DataTransferItemList`。
-
-#### types
-
-拖放的数据格式，和`items`的数据顺序是一一对应的。
-
-还包括了一些方法：
-
-#### setData/getData/clearData
-
-设置、读取、清除拖拽的数据。
-
-#### setDragImage
-
-设置拖动中跟随鼠标的图片，默认是A的半透明图像。
-
-### DataTransferItem
-
-一个拖动项接口。
-
-### DataTransferItemList
-
-拖动项集合接口。
-
-### DragEvent
-
-拖动事件接口。
+-   boundingClientRect，被观察者的边界信息。
+-   intersectionRect，相交区域。
+-   intersectionRatio，相交比例。
+-   isIntersecting，是否相交。
+-   rootBounds，根元素的边界信息。
+-   target，被观察者元素。
+-   time，交叉触发时间差。
 
 ## 属性和方法
 
@@ -87,36 +62,22 @@ tags:
 
 ## 事件
 
-元素拖放过程中有一系列事件，为方便描述，假设可拖动的元素为A，可被放置的元素是B。
-
-### dragstart
-
-A的拖动行为开始。
-
-### drag
-
-A被拖动中，它会被连续触发。
-
-### dragenter
-
-A被拖动进了B。
-
-### dragover
-
-A被拖动中，在B的区域内，它会被连续触发。
-
-### dragleave
-
-A被拖动离开了B。
-
-### drop
-
-A放在了B中。
-
-### dragend
-
-A的拖动行为停止，比如放开了鼠标。
+//
 
 ## 示例
 
-示例：https://taoliujun.github.io/example/web-api/HTML_Drag_and_Drop_API/index.html
+示例：https://taoliujun.github.io/example/web-api/Intersection_Observer_API/index.html
+
+1. 在高度400的父观察元素中，放3个高度300的被观察元素，触发阈值是`[0,1]`，表示被观察者的相交区域比例在0或1发生变化的时候，都会触发回到函数，初始化日志：
+
+![image](https://github.com/taoliujun/blog/assets/5689134/7c93addb-c0b1-4705-873d-fcd150550e22)
+
+元素1全部可见，元素2是0.33的区域可见，元素3则完全不可见。
+
+1. 滚动一点，元素1触发了1阈值。
+
+![image](https://github.com/taoliujun/blog/assets/5689134/791e2220-8837-4784-9139-094b9d6db4eb)
+
+3. 再滚动一点，元素1没有触发0阈值，所以日志中没有它；元素2触发了1阈值；元素3触发了0阈值。
+
+![image](https://github.com/taoliujun/blog/assets/5689134/28587ac6-29d7-4693-90fb-844d3b4f4239)

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Intersection_Observer_API</title>
+        <style>
+            body {
+                word-break: break-all;
+            }
+        </style>
+    </head>
+
+    <body>
+        <section id="d1" style="height: 400px; width: 400px; overflow: auto; border: 1px solid #999">
+            <div style="height: 300px; background-color: #f00">1</div>
+            <div style="height: 300px; background-color: #ff0">2</div>
+            <div style="height: 300px; background-color: green">3</div>
+        </section>
+        <script>
+            (() => {
+                function obCallback(entries) {
+                    console.info('==new round==');
+                    entries.forEach((v) => {
+                        const nodeName = v.target.textContent;
+                        console.info(`Element ${nodeName}:`, {
+                            isIntersecting: v.isIntersecting,
+                            intersectionRatio: v.intersectionRatio,
+                        });
+                    });
+                }
+
+                const d1 = document.querySelector('#d1');
+                const ob = new IntersectionObserver(obCallback, {
+                    root: d1,
+                    threshold: [0, 1],
+                });
+                Array.from(d1.children).forEach((v) => {
+                    ob.observe(v);
+                });
+            })();
+        </script>
+    </body>
+</html>

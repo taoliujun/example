@@ -1,19 +1,19 @@
 <!--hexo
 
 ---
-url: web-api-Media_Capture_and_Streams_API
+url: web-api-Page_Visibility_API
 tags:
   - webapi
-  - Media Capture Streams
+  - Page Visibility
 ---
 
 -->
 
-# Media Capture And Streams
+# Page Visibility
 
-> MDN: https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API
+> MDN: https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
 
-**Media Capture And Streams**用于捕获媒体流，媒体流可以是来自用户设备如摄像头，也可以是媒体节点如`video`，也可以来自WebRTC，或其他渠道。
+**Page Visibility**提供了用于监听页面可见性状态切换的事件，和返回页面可见性状态的属性。
 
 ## 接口
 
@@ -21,12 +21,20 @@ tags:
 
 ## 属性和方法
 
-//
+### hidden
+
+通过`document.hidden`返回页面是否处于不可见状态，值是`boolean`。
+
+### visibilityState
+
+通过`document.visibilityState`返回页面的可见性状态，值是`visible`或`hidden`。
 
 ## 事件
 
-//
+### visibilitychange
+
+页面可见性变化事件。
 
 ## 示例
 
-示例：https://taoliujun.github.io/example/web-api/Media_Capture_and_Streams_API/index.html
+示例：https://taoliujun.github.io/example/web-api/Page_Visibility_API/index.html

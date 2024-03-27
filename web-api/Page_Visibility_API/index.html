@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Page_Visibility_API</title>
+        <style>
+            body {
+                word-break: break-all;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="d1"></div>
+        <script>
+            (function () {
+                const d1 = document.querySelector('#d1');
+
+                document.addEventListener('visibilitychange', (e) => {
+                    const p1 = document.createElement('p');
+                    p1.textContent = new Date().toLocaleTimeString() + ' ' + document.visibilityState;
+                    d1.append(p1);
+                });
+            })();
+        </script>
+    </body>
+</html>
